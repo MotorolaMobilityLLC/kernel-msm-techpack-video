@@ -1729,6 +1729,9 @@ static void handle_event_change(enum hal_command_response cmd, void *data)
 						"%s: Failed to decide work mode\n",
 						__func__);
 			}
+			/* Update driver buffer count */
+			fmt->count_min = event_notify->fw_min_cnt;
+			msm_dcvs_reset(inst);
 			s_vpr_h(inst->sid,
 				"seq: No parameter change continue session\n");
 			rc = call_hfi_op(hdev, session_continue,
