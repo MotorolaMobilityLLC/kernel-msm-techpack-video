@@ -1860,6 +1860,7 @@ static inline u32 hfi_iris2_enc_dpb_buffer_size(u32 width, u32 height,
 			metadata_stride, meta_buf_height);
 		size = (aligned_height + chroma_height) * aligned_width +
 			meta_size_y + meta_size_c;
+		size = (size * (num_ref + 2)) + 4096;
 	} else {
 		ref_buf_height = (height + (HFI_VENUS_HEIGHT_ALIGNMENT - 1))
 			& (~(HFI_VENUS_HEIGHT_ALIGNMENT - 1));
