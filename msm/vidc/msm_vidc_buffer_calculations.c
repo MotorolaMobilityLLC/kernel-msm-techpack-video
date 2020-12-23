@@ -498,7 +498,7 @@ int msm_vidc_get_num_ref_frames(struct msm_vidc_inst *inst)
 	if (num_hp_layers > 1) {
 		/* LTR and B - frame not supported with hybrid HP */
 		if (inst->hybrid_hp)
-			num_ref = (num_hp_layers + 1) >> 1;
+			num_ref = num_hp_layers >> 1;
 		else if (codec == V4L2_PIX_FMT_HEVC)
 			num_ref = ((num_hp_layers + 1) / 2) + ltr_count;
 		else if ((codec == V4L2_PIX_FMT_H264) && (num_hp_layers < 4))
@@ -1043,7 +1043,7 @@ u32 msm_vidc_calculate_enc_output_frame_size(struct msm_vidc_inst *inst)
 		goto calc_done;
 
 	if (mbs_per_frame <= NUM_MBS_480P)
-		(void)frame_size; /* Default frame_size = YUVsize * 2 */
+		goto calc_done; /* Default frame_size = YUVsize * 2 */
 	else if (mbs_per_frame <= NUM_MBS_4k)
 		frame_size = frame_size >> 2;
 	else
@@ -1860,7 +1860,6 @@ static inline u32 hfi_iris2_enc_dpb_buffer_size(u32 width, u32 height,
 			metadata_stride, meta_buf_height);
 		size = (aligned_height + chroma_height) * aligned_width +
 			meta_size_y + meta_size_c;
-		size = (size * (num_ref + 2)) + 4096;
 	} else {
 		ref_buf_height = (height + (HFI_VENUS_HEIGHT_ALIGNMENT - 1))
 			& (~(HFI_VENUS_HEIGHT_ALIGNMENT - 1));
