@@ -47,8 +47,7 @@
 #define MAX_NUM_INPUT_BUFFERS VIDEO_MAX_FRAME // same as VB2_MAX_FRAME
 #define MAX_NUM_OUTPUT_BUFFERS VIDEO_MAX_FRAME // same as VB2_MAX_FRAME
 
-#define MAX_SUPPORTED_INSTANCES 16
-#define MAX_SUPPORTED_INSTANCES_24 24
+#define MAX_SUPPORTED_INSTANCES 24
 
 /* Maintains the number of FTB's between each FBD over a window */
 #define DCVS_FTB_WINDOW 16
